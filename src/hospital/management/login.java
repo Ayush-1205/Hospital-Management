@@ -12,7 +12,7 @@ import javax.swing.*;
 import java.sql.*;
 import java.io.*;
 import javax.swing.filechooser.*;
- 
+
 public class login extends JFrame {
     JTextField t1,t2;
     Statement st;
@@ -24,33 +24,33 @@ public class login extends JFrame {
     public login()
    {
       setLayout(new GridLayout(1,1,0,0));
-     
+
      setSize(800,800);
      setTitle("HOSPITAL MANAGEMENT");
-    
+
                 t1=new JTextField();
-                
+
                 t2=new JTextField();
                 add(t1);
                 add(t2);
-                
+
      this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
       try{
              Class.forName("com.mysql.jdbc.Driver");
              // Class.forName("com.mysql.jdbc.Driver");
 
-             con = DriverManager.getConnection("jdbc:mysql://localhost/login","root","mahak@250300");
+             con = DriverManager.getConnection("jdbc:mysql://localhost/login","root","password");
              System.out.println("driver loaded");
             // con=DriverManager.getConnection("jdbc:mysql://localhost:3306/student", "root","");
-             System.out.println("connection established"); 
+             System.out.println("connection established");
             st=con.createStatement();
             rs=st.executeQuery("select * from log");
               System.out.println("result set fetched from database");
             rs.next();
             //displayrecord1();
-           
+
          }
-   
+
          catch(Exception e)
          {
              System.out.println("employee error......"+e.toString());
@@ -60,11 +60,11 @@ public class login extends JFrame {
          {
              try
              {
-                
+
                  String name=rs.getString("username"), password=rs.getString("password");
                  t1.setText(name);
                  t2.setText(password);
-              
+
              }
              catch(Exception e)
              {
@@ -76,5 +76,5 @@ public class login extends JFrame {
        login d=new login();
        d.show();
    }
-    
+
 }

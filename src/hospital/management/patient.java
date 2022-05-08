@@ -13,11 +13,11 @@ public class patient extends javax.swing.JFrame implements ActionListener,ItemLi
      Statement st;
     Connection con;
     ResultSet rs;
-   
+
     int currec,recent;
     String doctor;
 
-    
+
     public patient() {
         initComponents();
         jButton3.addActionListener(this);
@@ -25,15 +25,15 @@ public class patient extends javax.swing.JFrame implements ActionListener,ItemLi
         jComboBox1.addItemListener(this);
          try{
              Class.forName("com.mysql.jdbc.Driver");
-              con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/login","root","mahak@250300");
+              con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/login","root","password");
              System.out.println("driver loaded");
-             System.out.println("connection established"); 
+             System.out.println("connection established");
             st=con.createStatement();
             rs=st.executeQuery("select * from patient");
               System.out.println("result set fetched from database");
             rs.next();
-            
-           
+
+
          }
          catch(Exception e)
          {
@@ -41,7 +41,7 @@ public class patient extends javax.swing.JFrame implements ActionListener,ItemLi
          }
     }
 
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -160,7 +160,7 @@ public class patient extends javax.swing.JFrame implements ActionListener,ItemLi
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -214,7 +214,7 @@ public class patient extends javax.swing.JFrame implements ActionListener,ItemLi
     {
         // if the state combobox is changed
         if (e.getSource() == jComboBox1) {
- 
+
             doctor=(String)jComboBox1.getSelectedItem();
         }
     }
@@ -232,25 +232,25 @@ public class patient extends javax.swing.JFrame implements ActionListener,ItemLi
               System.out.println("doctor");
               String name=jTextField1.getText(),gender=jTextField5.getText(),dob=jTextField6.getText(),address=jTextField4.getText();
               String id=jTextField2.getText(),age=jTextField3.getText(),bg=jTextField7.getText();
-              
+
               //System.out.println(name+gender+dob+address+id+age+doctor);
            st=con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
               String sql="insert into patient(P_ID,P_name,Address,DOB,Gender,Age,Bloodgroup,D_name) "+"values("+"\'"+id +"\' ,"+"\'"+name+"\',"+"\' "+address+"\' ,"+"\' "+dob+"\' ,"+"\' "+gender+"\' ,"+"\'"+age+"\',"+"\' "+bg+"\',"+"\' "+doctor+"\')";
             System.out.println(sql);
-            
+
             rs.afterLast();
            // rs=st.executeQuery(sql);
             st.executeUpdate(sql);
-         
+
             System.out.println("Data Inserted Successfully");
             JOptionPane.showMessageDialog(rootPane,"Data Inserted Successfully" );
             currec=rs.getRow();
             System.out.println("currec= "+currec);
             recent++;
          }
-          
+
            }
-          
+
         catch(Exception e)
         {
             System.out.println(e.toString());

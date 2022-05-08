@@ -18,7 +18,7 @@ public class doctor extends javax.swing.JFrame implements ActionListener {
      Statement st;
     Connection con;
     ResultSet rs;
-   
+
     int currec,recent;
     public doctor() {
         initComponents();
@@ -26,15 +26,15 @@ public class doctor extends javax.swing.JFrame implements ActionListener {
         jButton2.addActionListener(this);
          try{
              Class.forName("com.mysql.jdbc.Driver");
-              con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/login","root","mahak@250300");
+              con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/login","root","password");
              System.out.println("driver loaded");
-             System.out.println("connection established"); 
+             System.out.println("connection established");
             st=con.createStatement();
             rs=st.executeQuery("select * from Doctor");
               System.out.println("result set fetched from database");
             rs.next();
-            
-           
+
+
          }
          catch(Exception e)
          {
@@ -162,7 +162,7 @@ public class doctor extends javax.swing.JFrame implements ActionListener {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -220,29 +220,29 @@ public class doctor extends javax.swing.JFrame implements ActionListener {
               System.out.println("doctor");
               String name=jTextField1.getText(),department=jTextField5.getText(),qualification=jTextField6.getText(),address=jTextField3.getText();
               String id=jTextField2.getText(),phone=jTextField4.getText(),charges=jTextField7.getText();
-              
+
               //System.out.println(name+gender+dob+address+id+age+doctor);
            st=con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
               String sql="insert into Doctor(D_ID,D_name,Address,Department,Qualifications,Phone_number,charges) "+"values("+"\'"+id +"\' ,"+"\'"+name+"\',"+"\' "+address+"\' ,"+"\' "+department+"\' ,"+"\' "+qualification+"\' ,"+"\'"+phone+"\' ,"+"\'"+charges+"\')";
             System.out.println(sql);
-           
-            
+
+
             rs.afterLast();
            // rs=st.executeQuery(sql);
             st.executeUpdate(sql);
-           
+
             System.out.println("Data Inserted Successfully");
             currec=rs.getRow();
             System.out.println("currec= "+currec);
             recent++;
             System.out.println("Data Inserted Successfully");
             JOptionPane.showMessageDialog(rootPane,"Data Inserted Successfully" );
-            
+
          }
               new adminlogin().setVisible(true);
               this.dispose();
            }
-          
+
         catch(Exception e)
         {
             System.out.println(e.toString());

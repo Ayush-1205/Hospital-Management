@@ -28,30 +28,30 @@ public class diagonise extends javax.swing.JFrame implements ActionListener,Item
         jButton3.addActionListener(this);
         jCheckBox1.addActionListener(this);
         jComboBox1.addItemListener(this);
-        
-       
+
+
     }
     private void DisplayTable()
     {
       try{
-         
+
          Class.forName("com.mysql.jdbc.Driver");
-              con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/login","root","mahak@250300");
+              con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/login","root","password");
              System.out.println("driver loaded");
-             System.out.println("connection established"); 
+             System.out.println("connection established");
             st=con.createStatement();
-           
+
               System.out.println("result set fetched from database");
             //rs.next();
-           
+
     }
     catch(Exception e)
     {
         JOptionPane.showMessageDialog( null, e);
-    }   
+    }
     }
 
-  
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -237,7 +237,7 @@ public class diagonise extends javax.swing.JFrame implements ActionListener,Item
         jLabel6.setVisible(true);
         jComboBox1.setVisible(true);
         check=true;
-        
+
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
@@ -247,7 +247,7 @@ public class diagonise extends javax.swing.JFrame implements ActionListener,Item
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -299,7 +299,7 @@ public void itemStateChanged(ItemEvent e)
     {
         // if the state combobox is changed
         if (e.getSource() == jComboBox1) {
- 
+
             r_type=(String)jComboBox1.getSelectedItem();
             if(r_type=="General")
                    {
@@ -329,7 +329,7 @@ public void itemStateChanged(ItemEvent e)
            if(ae.getSource()==jButton2)
            {
                String id=jTextField1.getText(),symptom=jTextField2.getText(),diagnosis=jTextField3.getText(),medicine=jTextField4.getText();
-               
+
                if(check==true)
                {
                 String sql1="insert into room(P_ID,r_type,r_charges) "+"values("+"\'"+id +"\' ,"+"\'"+r_type+"\',"+"\' "+r_charges+"\')";
@@ -343,9 +343,9 @@ public void itemStateChanged(ItemEvent e)
             System.out.println(sql);
            // rs=st.executeQuery(sql);
             st.executeUpdate(sql);
-         
+
             System.out.println("Data Inserted Successfully");
-            JOptionPane.showMessageDialog(rootPane,"Data Inserted Successfully" ); 
+            JOptionPane.showMessageDialog(rootPane,"Data Inserted Successfully" );
              currec=rs.getRow();
             System.out.println("currec= "+currec);
             recent++;
@@ -360,7 +360,7 @@ public void itemStateChanged(ItemEvent e)
         catch(Exception e)
         {
             System.out.println(e.toString());
-           
+
         }
     }
 }
