@@ -13,11 +13,11 @@ public class patient1 extends javax.swing.JFrame implements ActionListener,ItemL
      Statement st;
     Connection con;
     ResultSet rs;
-
+   
     int currec,recent;
     String doctor;
 
-
+    
     public patient1() {
         initComponents();
         jButton3.addActionListener(this);
@@ -25,15 +25,15 @@ public class patient1 extends javax.swing.JFrame implements ActionListener,ItemL
         jComboBox1.addItemListener(this);
          try{
              Class.forName("com.mysql.jdbc.Driver");
-              con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/login","root","password");
+              con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/login","root","");
              System.out.println("driver loaded");
-             System.out.println("connection established");
+             System.out.println("connection established"); 
             st=con.createStatement();
             rs=st.executeQuery("select * from patient");
               System.out.println("result set fetched from database");
             rs.next();
-
-
+            
+           
          }
          catch(Exception e)
          {
@@ -41,7 +41,7 @@ public class patient1 extends javax.swing.JFrame implements ActionListener,ItemL
          }
     }
 
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -66,6 +66,7 @@ public class patient1 extends javax.swing.JFrame implements ActionListener,ItemL
         jLabel9 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -139,11 +140,14 @@ public class patient1 extends javax.swing.JFrame implements ActionListener,ItemL
         jButton3.setText("Back");
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1710, 900, 170, -1));
 
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hospital/management/1282825.jpg"))); // NOI18N
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, -4, 2050, 1050));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1953, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +164,7 @@ public class patient1 extends javax.swing.JFrame implements ActionListener,ItemL
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -193,6 +197,7 @@ public class patient1 extends javax.swing.JFrame implements ActionListener,ItemL
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -214,7 +219,7 @@ public class patient1 extends javax.swing.JFrame implements ActionListener,ItemL
     {
         // if the state combobox is changed
         if (e.getSource() == jComboBox1) {
-
+ 
             doctor=(String)jComboBox1.getSelectedItem();
         }
     }
@@ -232,25 +237,25 @@ public class patient1 extends javax.swing.JFrame implements ActionListener,ItemL
               System.out.println("doctor");
               String name=jTextField1.getText(),gender=jTextField5.getText(),dob=jTextField6.getText(),address=jTextField4.getText();
               String id=jTextField2.getText(),age=jTextField3.getText(),bg=jTextField7.getText();
-
+              
               //System.out.println(name+gender+dob+address+id+age+doctor);
            st=con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
               String sql="Update Patient SET P_name="+"\'"+name+"\',"+"Address="+"\'"+address+"\',"+"DOB="+"\'"+dob+"\',"+"Gender="+"\'"+gender+"\',"+"Age="+"\'"+age+"\',"+"Bloodgroup="+"\'"+bg+"\',"+"D_name="+"\'"+doctor+"\'" +" Where P_ID="+"\'"+id+"\'";
             System.out.println(sql);
-
+            
             rs.afterLast();
            // rs=st.executeQuery(sql);
             st.executeUpdate(sql);
-
+         
             System.out.println("Data updated Successfully");
             JOptionPane.showMessageDialog(rootPane,"Data updated Successfully" );
             currec=rs.getRow();
             System.out.println("currec= "+currec);
             recent++;
          }
-
+          
            }
-
+          
         catch(Exception e)
         {
             System.out.println(e.toString());

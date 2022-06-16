@@ -34,9 +34,9 @@ private void DisplayTable()
 {
     try{
          Class.forName("com.mysql.jdbc.Driver");
-              con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/login","root","password");
+              con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/login","root","mahak@250300");
              System.out.println("driver loaded");
-             System.out.println("connection established");
+             System.out.println("connection established"); 
             st=con.createStatement();
             rs=st.executeQuery("select * from Doctor");
               System.out.println("result set fetched from database");
@@ -48,7 +48,7 @@ private void DisplayTable()
         JOptionPane.showMessageDialog( null, e);
     }
 }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -103,7 +103,7 @@ private void DisplayTable()
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

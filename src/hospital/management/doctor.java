@@ -18,7 +18,7 @@ public class doctor extends javax.swing.JFrame implements ActionListener {
      Statement st;
     Connection con;
     ResultSet rs;
-
+   
     int currec,recent;
     public doctor() {
         initComponents();
@@ -26,15 +26,15 @@ public class doctor extends javax.swing.JFrame implements ActionListener {
         jButton2.addActionListener(this);
          try{
              Class.forName("com.mysql.jdbc.Driver");
-              con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/login","root","password");
+              con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/login","root","");
              System.out.println("driver loaded");
-             System.out.println("connection established");
+             System.out.println("connection established"); 
             st=con.createStatement();
             rs=st.executeQuery("select * from Doctor");
               System.out.println("result set fetched from database");
             rs.next();
-
-
+            
+           
          }
          catch(Exception e)
          {
@@ -64,6 +64,9 @@ public class doctor extends javax.swing.JFrame implements ActionListener {
         jLabel8 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,15 +138,27 @@ public class doctor extends javax.swing.JFrame implements ActionListener {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 770, -1, -1));
 
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hospital/management/1282799.jpg"))); // NOI18N
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, -4, 1920, 700));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hospital/management/h4.jpg"))); // NOI18N
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 696, 1920, 740));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hospital/management/h4.jpg"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1922, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1922, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 785, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -162,7 +177,7 @@ public class doctor extends javax.swing.JFrame implements ActionListener {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -194,6 +209,8 @@ public class doctor extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -201,6 +218,7 @@ public class doctor extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
@@ -220,29 +238,31 @@ public class doctor extends javax.swing.JFrame implements ActionListener {
               System.out.println("doctor");
               String name=jTextField1.getText(),department=jTextField5.getText(),qualification=jTextField6.getText(),address=jTextField3.getText();
               String id=jTextField2.getText(),phone=jTextField4.getText(),charges=jTextField7.getText();
-
+              
               //System.out.println(name+gender+dob+address+id+age+doctor);
            st=con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
               String sql="insert into Doctor(D_ID,D_name,Address,Department,Qualifications,Phone_number,charges) "+"values("+"\'"+id +"\' ,"+"\'"+name+"\',"+"\' "+address+"\' ,"+"\' "+department+"\' ,"+"\' "+qualification+"\' ,"+"\'"+phone+"\' ,"+"\'"+charges+"\')";
             System.out.println(sql);
-
-
+           
+            
             rs.afterLast();
            // rs=st.executeQuery(sql);
             st.executeUpdate(sql);
-
+           
             System.out.println("Data Inserted Successfully");
             currec=rs.getRow();
             System.out.println("currec= "+currec);
             recent++;
             System.out.println("Data Inserted Successfully");
+            patient p=new patient();
+            p.jComboBox1.addItem(name+"("+department+")");
             JOptionPane.showMessageDialog(rootPane,"Data Inserted Successfully" );
-
+            
          }
-              new adminlogin().setVisible(true);
-              this.dispose();
+             // new adminlogin().setVisible(true);
+             // this.dispose();
            }
-
+          
         catch(Exception e)
         {
             System.out.println(e.toString());

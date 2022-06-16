@@ -17,26 +17,26 @@ public class adminlogin extends javax.swing.JFrame implements ActionListener{
     ResultSet rs;
   //  int currec,recent;
 
-
+    
     public adminlogin() {
         initComponents();
         jButton1.addActionListener(this);
-
+       
         try{
              Class.forName("com.mysql.jdbc.Driver");
-              con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/login","root","password");
+              con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/login","root","");
              System.out.println("driver loaded");
-             System.out.println("connection established");
+             System.out.println("connection established"); 
             st=con.createStatement();
          }
-
+   
          catch(Exception e)
          {
              System.out.println("employee error......"+e.toString());
          }
     }
 
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -97,12 +97,12 @@ public class adminlogin extends javax.swing.JFrame implements ActionListener{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -122,11 +122,11 @@ public class adminlogin extends javax.swing.JFrame implements ActionListener{
         }
         //</editor-fold>
 
-
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               new adminlogin().setExtendedState(JFrame.MAXIMIZED_BOTH);
-               new adminlogin().setVisible(true);
+               new adminlogin().setExtendedState(JFrame.MAXIMIZED_BOTH); 
+               new adminlogin().setVisible(true); 
             }
         });
     }
@@ -144,7 +144,7 @@ public class adminlogin extends javax.swing.JFrame implements ActionListener{
     // End of variables declaration//GEN-END:variables
 public void actionPerformed(ActionEvent ae)
 {
-
+   
     try
        {
            if(ae.getSource()==jButton1)
@@ -153,7 +153,7 @@ public void actionPerformed(ActionEvent ae)
               String name,pass;
               name=jTextField1.getText();
               pass=jPasswordField1.getText();
-
+             
             st=con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
             String sql="SELECT * FROM Adminlogin "+"where adminname="+"\'"+name+"\'";
             System.out.println(sql);
@@ -161,7 +161,7 @@ public void actionPerformed(ActionEvent ae)
             rs.next();
             String password=rs.getString("password");
             System.out.println(password);
-
+              
               if(password.equals(pass))
               {
               new adminhome().setVisible(true);
@@ -169,12 +169,12 @@ public void actionPerformed(ActionEvent ae)
               }
               else
               {
-                  JOptionPane.showMessageDialog(this, "either wrong password or wrong username");
+                  JOptionPane.showMessageDialog(this, "either wrong password or wrong username"); 
               }
            }
-
-
-
+           
+      
+        
         }
         catch(Exception e)
         {
